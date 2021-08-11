@@ -6,7 +6,7 @@ const path = require("path");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
 const userRoutes = require("./routes/userRoutes")
-
+const guideRoutes= require("./routes/guideRoutes")
 
 // Mongo Db
 const connectDb = require("./db");
@@ -26,7 +26,7 @@ passport.use(jwtStrategy);
 
 // routes
 app.use(userRoutes);
-
+app.use(guideRoutes);
 
 
 
