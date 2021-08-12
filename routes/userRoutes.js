@@ -4,7 +4,7 @@ const passport = require("passport");
 const router = express.Router();
 
 // Controllers
-const { signup, signin } = require("../controllers/userControllers");
+const { signup, signin, usersList } = require("../controllers/userControllers");
 
 
 
@@ -15,5 +15,5 @@ router.post(
   passport.authenticate("local", { session: false })
   ,signin
 );
-
+router.get("/users",usersList)
 module.exports = router;

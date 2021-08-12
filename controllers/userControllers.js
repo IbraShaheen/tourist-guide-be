@@ -43,3 +43,12 @@ const generateToken = (user) => {
   const token = jwt.sign(payload, JWT_SECRET);
   return token;
 };
+
+exports.usersList = async (req, res, next) => {
+  try {
+    const users = await User.find()
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -2,10 +2,10 @@
 const express = require("express");
 const router = express.Router();
 
-
 // Controllers
-const {guideList}=require("../controllers/guideControllers")
+const { cityList } = require("../controllers/cityControllers");
 
-router.get("/guides",guideList);
+
+router.get("/cities",cityList)
 
 module.exports = router;
