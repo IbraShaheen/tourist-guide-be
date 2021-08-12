@@ -8,9 +8,11 @@ const CitySchema = new mongoose.Schema({
   image: {
     type: String,
   },
+
   description: {
     type: String,
   },
+
   country: {
     type: mongoose.Schema.ObjectId,
     ref: "Country",

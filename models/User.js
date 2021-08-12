@@ -23,17 +23,18 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       required: [true, "Please add your email"],
     },
+
     password: {
       type: String,
       required: [true, "Password is required"],
       minlength: [8, "Password can't be less than 8 characters"],
     },
+
     image: {
       type: String,
       default:
         "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
     },
-
 
     phone: {
       type: Number,
@@ -45,13 +46,13 @@ const UserSchema = new mongoose.Schema(
 
     gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: ["male", "female"],
     },
 
     createdAt: {
-        type: Date,
-        default: Date.now,
-      },
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -59,8 +60,8 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.virtual("fullname").get(function(){
-  return `${this.firstname} ${this.lastname}`
-})
+UserSchema.virtual("fullname").get(function () {
+  return `${this.firstname} ${this.lastname}`;
+});
 
 module.exports = mongoose.model("User", UserSchema);

@@ -22,6 +22,7 @@ const GuideSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "City",
   },
+
   createdAt: {
     type: Date,
     default: Date.now,
