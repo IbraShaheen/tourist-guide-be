@@ -10,7 +10,7 @@ const GuideSchema = new mongoose.Schema({
   },
 
   notAvailabeDates: {
-    type: Array,
+    type: [],
   },
 
   user: {
@@ -21,6 +21,10 @@ const GuideSchema = new mongoose.Schema({
   city: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "City",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
