@@ -2,21 +2,18 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
-const  User  = require("../models/User");
+const User = require("../models/User");
 const Guide = require("../models/Guide");
 const { JWT_EXPIRATION_MS, JWT_SECRET } = require("../config/keys");
 
-
 exports.signup = async (req, res, next) => {
   try {
-    
     const saltRound = 10;
     const hashedPassword = await bcrypt.hash(req.body.password, saltRound);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
-    if(!req.body.type){
-      await Guide.create({user:newUser.id})
+    if (!req.body.type) {
+      await Guide.create({ user: newUser.id });
     }
     const token = generateToken(newUser);
 
@@ -26,12 +23,10 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-
 exports.signin = async (req, res, next) => {
   const token = generateToken(req.user);
   res.json({ token });
 };
-
 
 const generateToken = (user) => {
   const payload = {
@@ -46,7 +41,7 @@ const generateToken = (user) => {
 
 exports.usersList = async (req, res, next) => {
   try {
-    const users = await User.find()
+    const users = await User.find();
     res.json(users);
   } catch (error) {
     next(error);
