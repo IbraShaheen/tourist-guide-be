@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const CountrySchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
   },
 
   createdAt: {
