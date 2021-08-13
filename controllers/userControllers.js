@@ -16,7 +16,7 @@ exports.signup = async (req, res, next) => {
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
     if(!req.body.type){
-      await Guide.create({user:newUser.id})
+      await Guide.create({user:newUser.id, cityname:cityname})
     }
     const token = generateToken(newUser);
 
