@@ -5,21 +5,20 @@ const path = require("path");
 
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
-const userRoutes = require("./routes/userRoutes")
-const guideRoutes= require("./routes/guideRoutes")
-const countryRoutes = require("./routes/countryRoutes")
-const cityRoutes = require("./routes/cityRoutes")
+const userRoutes = require("./routes/userRoutes");
+const guideRoutes = require("./routes/guideRoutes");
+const countryRoutes = require("./routes/countryRoutes");
+const cityRoutes = require("./routes/cityRoutes");
 // Mongo Db
 const connectDb = require("./db");
 
 const app = express();
 
-
-
 app.use(cors());
 connectDb();
 app.use(express.json());
 app.use(passport.initialize());
+
 app.use("/upload", express.static(path.join(__dirname, "upload")));
 
 passport.use(localStrategy);
@@ -31,7 +30,8 @@ app.use(guideRoutes);
 app.use(countryRoutes);
 app.use(cityRoutes);
 
-
+//TODO
+// app.use("/media", express.static(path.join(__dirname, "media")));
 
 //error M.W
 app.use((err, req, res, next) => {
@@ -45,8 +45,6 @@ app.use((req, res, next) => {
   res.status(404).json({ message: "Path Not Found" });
 });
 
-
-
 app.listen(8000, () => {
-    console.log("The application is running on localhost:8000");
-  });
+  console.log("The application is running on localhost:8000");
+});
