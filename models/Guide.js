@@ -3,21 +3,16 @@ const mongoose = require("mongoose");
 const GuideSchema = new mongoose.Schema({
   price: {
     type: Number,
-    // default: 1
+    default: null,
   },
 
   description: {
     type: String,
-    // default:""
+    default: "",
   },
 
   notAvailabeDates: {
     type: [],
-  },
-  
-  cityname: {
-    type: String,
-    // default:""
   },
 
   user: {
@@ -25,20 +20,20 @@ const GuideSchema = new mongoose.Schema({
     ref: "User",
   },
 
-  maxsize :{
+  maxsize: {
     type: Number,
+    default: null,
   },
 
-  
   createdAt: {
     type: Date,
     default: Date.now,
   },
 
-  // city: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "City",
-  // },
+  city: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "City",
+  },
 });
 
 module.exports = mongoose.model("Guide", GuideSchema);
