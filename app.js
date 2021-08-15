@@ -31,7 +31,7 @@ app.use(countryRoutes);
 app.use(cityRoutes);
 
 //TODO
-// app.use("/media", express.static(path.join(__dirname, "media")));
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 //error M.W
 app.use((err, req, res, next) => {

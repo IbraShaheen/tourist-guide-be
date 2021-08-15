@@ -47,6 +47,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ['male', 'female'],
     },
+    type:{
+      type:String,
+      default:"",
+    },
 
     createdAt: {
         type: Date,
