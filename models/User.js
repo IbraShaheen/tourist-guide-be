@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const slug = require("mongoose-slug-generator");
+mongoose.plugin(slug);
 
 const UserSchema = new mongoose.Schema(
   {
@@ -7,6 +9,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       required: [true, "Please add a username"],
     },
+    slug: { type: String, slug: "username" },
 
     firstname: {
       type: String,
