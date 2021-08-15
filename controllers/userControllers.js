@@ -12,7 +12,7 @@ exports.signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRound);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
-    if (!req.body.type) {
+    if (req.body.type==="guide") {
       await Guide.create({ user: newUser.id });
     }
     const token = generateToken(newUser);
@@ -49,6 +49,9 @@ exports.usersList = async (req, res, next) => {
 };
 exports.userUpdate = async (req, res, next) => {
   try {
+    if(req.file)
+    req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+
     User.findOneAndUpdate(
       { _id: req.params.userId },
       req.body,
