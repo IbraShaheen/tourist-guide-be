@@ -22,7 +22,7 @@ exports.guideUpdate = async (req, res, next) => {
         }
         res.json(guide);
       }
-    );
+    ).populate("user").populate("city");
   } catch (error) {
     next(error);
   }

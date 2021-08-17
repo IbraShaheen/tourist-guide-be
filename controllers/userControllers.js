@@ -12,13 +12,17 @@ exports.signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRound);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
+    // console.log(newUser)
+
     if (req.body.type==="guide") {
       await Guide.create({ user: newUser.id });
     }
+
     const token = generateToken(newUser);
 
     res.status(201).json({ token });
   } catch (error) {
+    // console.log("from catch")
     next(error);
   }
 };
@@ -29,10 +33,11 @@ exports.signin = async (req, res, next) => {
 };
 
 const generateToken = (user) => {
+  user = user.toJSON()
+  delete user.password
   const payload = {
-    id: user.id,
-    username: user.username,
-    exp: Date.now() + JWT_EXPIRATION_MS,
+    ...user,
+    exp: Date.now() + JWT_EXPIRATION_MS
   };
 
   const token = jwt.sign(payload, JWT_SECRET);
