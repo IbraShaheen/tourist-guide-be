@@ -9,6 +9,7 @@ const userRoutes = require("./routes/userRoutes");
 const guideRoutes = require("./routes/guideRoutes");
 const countryRoutes = require("./routes/countryRoutes");
 const cityRoutes = require("./routes/cityRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 // Mongo Db
 const connectDb = require("./db");
 
@@ -29,6 +30,7 @@ app.use(userRoutes);
 app.use(guideRoutes);
 app.use(countryRoutes);
 app.use(cityRoutes);
+app.use(bookingRoutes);
 
 //TODO
 app.use("/media", express.static(path.join(__dirname, "media")));
