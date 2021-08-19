@@ -22,7 +22,7 @@ const GuideSchema = new mongoose.Schema({
 
   maxsize: {
     type: Number,
-    default: null,
+    default: 1,
   },
 
   createdAt: {
@@ -33,6 +33,7 @@ const GuideSchema = new mongoose.Schema({
   city: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "City",
+    
   },
 });
 
