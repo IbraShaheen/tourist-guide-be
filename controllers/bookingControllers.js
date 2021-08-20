@@ -5,7 +5,12 @@ exports.bookingList = async (_, res, next) => {
   try {
     const booking = await Booking.find()
       .populate("user", "-password")
-      .populate("guide");
+      .populate({
+        path: "guide",
+        populate: {
+           path: "user" 
+        }
+     })
     res.json(booking);
   } catch (error) {
     next(error);
