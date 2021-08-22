@@ -17,6 +17,10 @@ const CitySchema = new mongoose.Schema({
     ref: "Country",
   },
 
+  location:{
+    type:[],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
