@@ -11,23 +11,50 @@ exports.guideList = async (req, res, next) => {
 
 exports.guideUpdate = async (req, res, next) => {
   try {
-    Guide.findOneAndUpdate(
-      { _id: req.params.guideId },
-      req.body,
-      { new: true },
-      function (err, guide) {
-        if (err) {
-          next({ message: "guide not Found", status: 404 });
+    if (req.body.rating) {
+      Guide.findOneAndUpdate(
+        { _id: req.params.guideId },
+        {
+          $push: { rating: req.body.rating },
+        },
+
+        { new: true },
+        function (err, guide) {
+          if (err) {
+            next({ message: "guide not Found", status: 404 });
+          }
+          res.json(guide);
         }
-        res.json(guide);
-      }
-    )
-      .populate("user")
-      .populate("city");
+      )
+        .populate("user")
+        .populate("city");
+    } else {
+      Guide.findOneAndUpdate(
+        { _id: req.params.guideId },
+        {
+          price: req.body.price,
+          description: req.body.description,
+          maxsize: req.body.maxsize,
+          city: req.body.city,
+          notAvailabeDates: req.body.notAvailabeDates,
+        },
+
+        { new: true },
+        function (err, guide) {
+          if (err) {
+            next({ message: "guide not Found", status: 404 });
+          }
+          res.json(guide);
+        }
+      )
+        .populate("user")
+        .populate("city");
+    }
   } catch (error) {
     next(error);
   }
 };
+
 exports.guideSearch = async (req, res, next) => {
   try {
     const guides = await Guide.find({
