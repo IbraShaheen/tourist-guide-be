@@ -27,6 +27,9 @@ const GuideSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
+  location:{
+    type:[],
+  },
 
   createdAt: {
     type: Date,

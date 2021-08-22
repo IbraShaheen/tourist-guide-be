@@ -37,6 +37,7 @@ exports.guideUpdate = async (req, res, next) => {
           maxsize: req.body.maxsize,
           city: req.body.city,
           notAvailabeDates: req.body.notAvailabeDates,
+          location: req.body.location
         },
 
         { new: true },
@@ -61,7 +62,7 @@ exports.guideSearch = async (req, res, next) => {
       city: req.body.city,
       maxsize: { $gte: req.body.maxsize },
       notAvailabeDates: { $nin: req.body.dates },
-    }).populate("user");
+    }).populate("user").populate("city");
     res.json(guides);
   } catch (error) {
     next(error);
