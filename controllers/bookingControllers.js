@@ -8,9 +8,9 @@ exports.bookingList = async (_, res, next) => {
       .populate({
         path: "guide",
         populate: {
-           path: "user" 
-        }
-     })
+          path: "user",
+        },
+      });
     res.json(booking);
   } catch (error) {
     next(error);
@@ -24,11 +24,40 @@ exports.bookingCreate = async (req, res, next) => {
 
   try {
     const newBooking = await Booking.create(req.body);
-    await Guide.findByIdAndUpdate(req.body.guide,{
-      $push:{notAvailabeDates:req.body.choosenDates},
-    })
-
+    await Guide.findByIdAndUpdate(req.body.guide, {
+      $push: { notAvailabeDates: req.body.choosenDates },
+    });
+    //send grid
     res.status(201).json(newBooking);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.bookingDelete = async (req, res, next) => {
+  try {
+    const booking = await Booking.findById(
+      { _id: req.params.bookingId },
+      function (err) {
+        if (err) {
+          next({
+            message: " you can't delete a booking that's not yours",
+            status: 404,
+          });
+        }
+      }
+    );
+    await Booking.deleteOne({ _id: req.params.bookingId });
+    console.log(booking);
+
+    const guide = await Guide.findByIdAndUpdate(
+      booking.guide,
+      {
+        $pull: { notAvailabeDates: { $in: booking.choosenDates } },
+      },
+      { multi: true }
+    );
+
+    res.end();
   } catch (error) {
     next(error);
   }

@@ -5,6 +5,9 @@ const GuideSchema = new mongoose.Schema({
     type: Number,
     default: null,
   },
+  rating: {
+    type: [],
+  },
 
   description: {
     type: String,
@@ -33,7 +36,6 @@ const GuideSchema = new mongoose.Schema({
   city: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "City",
-    
   },
 });
 
