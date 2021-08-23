@@ -6,6 +6,7 @@
   "author": "IbraShaheen <engibraheem1995@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.6",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
