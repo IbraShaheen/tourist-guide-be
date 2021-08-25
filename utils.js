@@ -55,7 +55,7 @@ exports.sendBookingMail = async (user, userInsideGuide, newBooking, guide) => {
   <tbody style="border-bottom: 1px solid #dddddd;">
       <tr style="border-bottom: 1px solid #dddddd;">
           <td style="padding: 12px 15px; text-align: center;">$ ${
-            newBooking.groupSize * guide.price
+            newBooking.groupSize * guide.price * newBooking.choosenDates.length
           }</td>
           <td style="padding: 12px 15px; text-align: center;">${
             newBooking.groupSize

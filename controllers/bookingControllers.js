@@ -30,13 +30,14 @@ exports.bookingCreate = async (req, res, next) => {
     const user = await User.findById({ _id: newBooking.user });
     const userInsideGuide = await User.findById({ _id: guide.user });
 
-    sendBookingMail(user, userInsideGuide, newBooking, guide);
-    sendRatingMail(
-      req.body.guide,
-      user.email,
-      user.fullname,
-      newBooking.endDate
-    );
+    // TODO
+    // sendBookingMail(user, userInsideGuide, newBooking, guide);
+    // sendRatingMail(
+    //   req.body.guide,
+    //   user.email,
+    //   user.fullname,
+    //   newBooking.endDate
+    // );
 
     res.status(201).json(newBooking);
   } catch (error) {
