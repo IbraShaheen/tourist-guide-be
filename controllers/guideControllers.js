@@ -15,7 +15,7 @@ exports.guideUpdate = async (req, res, next) => {
       Guide.findOneAndUpdate(
         { _id: req.params.guideId },
         {
-          $push: { rating: req.body.rating },
+          $push: { rating: +req.body.rating },
         },
 
         { new: true },
