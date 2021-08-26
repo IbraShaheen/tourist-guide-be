@@ -14,7 +14,7 @@ exports.signup = async (req, res, next) => {
     const newUser = await User.create(req.body);
     // console.log(newUser)
 
-    if (req.body.type==="guide") {
+    if (req.body.type === "guide") {
       await Guide.create({ user: newUser.id });
     }
 
@@ -33,11 +33,11 @@ exports.signin = async (req, res, next) => {
 };
 
 const generateToken = (user) => {
-  user = user.toJSON()
-  delete user.password
+  user = user.toJSON();
+  delete user.password;
   const payload = {
     ...user,
-    exp: Date.now() + JWT_EXPIRATION_MS
+    exp: Date.now() + JWT_EXPIRATION_MS,
   };
 
   const token = jwt.sign(payload, JWT_SECRET);
@@ -54,8 +54,8 @@ exports.usersList = async (req, res, next) => {
 };
 exports.userUpdate = async (req, res, next) => {
   try {
-    if(req.file)
-    req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    if (req.file)
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
 
     User.findOneAndUpdate(
       { _id: req.params.userId },

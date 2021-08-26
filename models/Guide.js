@@ -1,45 +1,61 @@
 const mongoose = require("mongoose");
 
-const GuideSchema = new mongoose.Schema({
-  price: {
-    type: Number,
-    default: null,
-  },
-  rating: {
-    type: [],
-  },
+const GuideSchema = new mongoose.Schema(
+  {
+    price: {
+      type: Number,
+      default: null,
+    },
+    rating: {
+      type: [],
+    },
 
-  description: {
-    type: String,
-    default: "",
-  },
+    description: {
+      type: String,
+      default: "",
+    },
 
-  notAvailabeDates: {
-    type: [],
-  },
+    notAvailabeDates: {
+      type: [],
+    },
 
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
 
-  maxsize: {
-    type: Number,
-    default: 1,
-  },
-  location:{
-    type:[],
-  },
+    maxsize: {
+      type: Number,
+      default: 1,
+    },
+    location: {
+      type: [],
+    },
 
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
 
-  city: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "City",
+    city: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "City",
+    },
   },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
-module.exports = mongoose.model("Guide", GuideSchema);
+GuideSchema.virtual("avgOfRating").get(function () {
+  if (this.rating.length !== 0) {
+    console.log("hi1");
+
+    return Math.ceil(this.rating.reduce((a, b) => a + b) / this.rating.length);
+  } else {
+    console.log("hi2");
+    return 0;
+  }
+}),
+  (module.exports = mongoose.model("Guide", GuideSchema));

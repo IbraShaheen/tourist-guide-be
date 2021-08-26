@@ -9,6 +9,20 @@ exports.guideList = async (req, res, next) => {
   }
 };
 
+exports.guideSearch = async (req, res, next) => {
+  try {
+    const guides = await Guide.find({
+      city: req.body.city,
+      maxsize: { $gte: req.body.maxsize },
+      notAvailabeDates: { $nin: req.body.dates },
+    })
+      .populate("user")
+      .populate("city");
+    res.json(guides);
+  } catch (error) {
+    next(error);
+  }
+};
 exports.guideUpdate = async (req, res, next) => {
   try {
     if (req.body.rating) {
@@ -51,21 +65,6 @@ exports.guideUpdate = async (req, res, next) => {
         .populate("user")
         .populate("city");
     }
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.guideSearch = async (req, res, next) => {
-  try {
-    const guides = await Guide.find({
-      city: req.body.city,
-      maxsize: { $gte: req.body.maxsize },
-      notAvailabeDates: { $nin: req.body.dates },
-    })
-      .populate("user")
-      .populate("city");
-    res.json(guides);
   } catch (error) {
     next(error);
   }
