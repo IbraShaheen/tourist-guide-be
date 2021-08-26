@@ -50,11 +50,11 @@ const GuideSchema = new mongoose.Schema(
 
 GuideSchema.virtual("avgOfRating").get(function () {
   if (this.rating.length !== 0) {
-    console.log("hi1");
+
 
     return Math.ceil(this.rating.reduce((a, b) => a + b) / this.rating.length);
   } else {
-    console.log("hi2");
+
     return 0;
   }
 }),
