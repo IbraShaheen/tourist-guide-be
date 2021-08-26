@@ -103,8 +103,9 @@ exports.sendRatingMail = async (guideId, userEmail, user, endDate) => {
     html: `<center >
     <legend><h2>Guide Rating</h2></legend>
    
-    <p style="font-size: large; color: black; text-shadow: 2px 2px 10px green"> To Rate Your Previous Guide ,Please Click On The Link Below:  </p>
-    <a href="http://localhost:3000/rating/${guideId}">Here<a/>
+    <p style="font-size: large; color: black; text-shadow: 2px 2px 10px green"> 
+    How Was Your Guide ? we want your feedback  </p>
+    <a href="http://localhost:3000/rating/${guideId}">Click Here<a/>
     </center>`,
   };
   try {
