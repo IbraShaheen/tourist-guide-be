@@ -12,7 +12,6 @@ exports.signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRound);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
-    // console.log(newUser)
 
     if (req.body.type === "guide") {
       await Guide.create({ user: newUser.id });
@@ -22,7 +21,6 @@ exports.signup = async (req, res, next) => {
 
     res.status(201).json({ token });
   } catch (error) {
-    // console.log("from catch")
     next(error);
   }
 };

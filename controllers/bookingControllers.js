@@ -31,13 +31,13 @@ exports.bookingCreate = async (req, res, next) => {
     const userInsideGuide = await User.findById({ _id: guide.user });
 
     // TODO
-    sendBookingMail(user, userInsideGuide, newBooking, guide);
-    sendRatingMail(
-      req.body.guide,
-      user.email,
-      user.fullname,
-      newBooking.endDate
-    );
+    // sendBookingMail(user, userInsideGuide, newBooking, guide);
+    // sendRatingMail(
+    //   req.body.guide,
+    //   user.email,
+    //   user.fullname,
+    //   newBooking.endDate
+    // );
 
     res.status(201).json(newBooking);
   } catch (error) {
@@ -58,7 +58,6 @@ exports.bookingDelete = async (req, res, next) => {
       }
     );
     await Booking.deleteOne({ _id: req.params.bookingId });
-    console.log(booking);
 
     const guide = await Guide.findByIdAndUpdate(
       booking.guide,

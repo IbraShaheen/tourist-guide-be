@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
       default:
-        "https://i.pinimg.com/originals/e2/7c/87/e27c8735da98ec6ccdcf12e258b26475.png",
+        "https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png",
     },
 
 
