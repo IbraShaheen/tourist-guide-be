@@ -11,7 +11,10 @@ exports.sendBookingMail = async (user, userInsideGuide, newBooking, guide) => {
       {
         name: `${user.fullname}`,
         // email: `${user.email}`,
-        email: "engibraheem1995@gmail.com",
+        // email: "engibraheem1995@gmail.com",
+        email: "ibrakh95kh@gmail.com",
+
+        
       },
       {
         name: `${userInsideGuide.fullname}`,
@@ -104,7 +107,7 @@ exports.sendRatingMail = async (guideId, userEmail, user, endDate) => {
     <legend><h2>Guide Rating</h2></legend>
    
     <p style="font-size: large; color: black; text-shadow: 2px 2px 10px green"> 
-    How Was Your Guide ? we want your feedback  </p>
+    How Was Your Guide ? we need your feedback  </p>
     <a href="http://localhost:3000/rating/${guideId}">Click Here<a/>
     </center>`,
   };
